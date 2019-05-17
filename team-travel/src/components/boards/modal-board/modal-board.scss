@@ -1,0 +1,42 @@
+@import "../../../styles/settings/_colors.scss";
+@import "../../../styles/settings/_sizes.scss";
+@import "../../../styles/settings/_mixins.scss";
+
+.modal-board {
+  align-items: center;
+  background-color: $color-modal-bg;
+  display: none;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  overflow-y: scroll;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 99999;
+
+  &.-active {
+    display: flex;
+  }
+
+  &__container {
+    margin: 0 $mobile-gutter-width;
+    @include respond-to($breakpoint-tablet) {
+      width: 470px;
+    }
+  }
+
+  &__content {
+    padding: 10px 20px;
+  }
+
+  &__footer {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+.modal_width{
+  width: 500px;
+}

@@ -1,0 +1,17 @@
+@import "../../../styles/settings/_colors.scss";
+
+.board-container {
+  background-color: $color-white;
+  border: $border;
+  border-radius: 3px;
+  display: inline-block;
+  height: auto;
+  overflow: visible;
+  width: 100%;
+
+  &__borderless {
+    @extend .board-container;
+    border: none;
+  }
+ 
+}

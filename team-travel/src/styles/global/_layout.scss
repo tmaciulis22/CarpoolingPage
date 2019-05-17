@@ -1,0 +1,147 @@
+$_columns: 12;
+
+.container {
+  box-sizing: border-box;
+  padding: 0 $mobile-padding;
+  width: 100%;
+
+  &--inner {
+    box-sizing: border-box;
+    width: 100%;
+  }
+}
+
+.row {
+  box-sizing: border-box;
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: -$mobile-gutter-width / 2;
+  margin-right: -$mobile-gutter-width / 2;
+}
+
+@for $i from 1 through $_columns {
+  .col-s-#{$i} {
+    box-sizing: border-box;
+    flex-basis: 100 / $_columns * $i * 1%;
+    flex-grow: 1;
+    max-width: 100 / $_columns * $i * 1%;
+  }
+}
+
+@for $i from 1 through $_columns {
+
+  .col-s-#{$i},
+  .col-m-#{$i},
+  .col-l-#{$i} {
+    padding: 0 $mobile-gutter-width / 2;
+  }
+}
+
+@media screen and (min-width: $breakpoint-tablet) {
+  .container {
+    margin: 0 auto;
+    width: $tablet-container-width;
+  }
+
+  .row {
+    margin-left: -$tablet-gutter-width / 2;
+    margin-right: -$tablet-gutter-width / 2;
+  }
+
+  @for $i from 1 through $_columns {
+
+    .col-s-#{$i},
+    .col-m-#{$i},
+    .col-l-#{$i} {
+      padding: 0 $tablet-gutter-width / 2;
+    }
+  }
+
+  @for $i from 1 through $_columns {
+    .col-m-#{$i} {
+      box-sizing: border-box;
+      flex-basis: 100 / $_columns * $i * 1%;
+      flex-grow: 1;
+      max-width: 100 / $_columns * $i * 1%;
+      padding: 0 $tablet-gutter-width / 2;
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+  .container {
+    width: $desktop-container-width;
+  }
+
+  .row {
+    margin-left: -$desktop-gutter-width / 2;
+    margin-right: -$desktop-gutter-width / 2;
+  }
+
+  @for $i from 1 through $_columns {
+
+    .col-s-#{$i},
+    .col-m-#{$i},
+    .col-l-#{$i} {
+      padding: 0 $desktop-gutter-width / 2;
+    }
+  }
+
+  @for $i from 1 through $_columns {
+    .col-l-#{$i} {
+      box-sizing: border-box;
+      flex-basis: 100 / $_columns * $i * 1%;
+      flex-grow: 1;
+      max-width: 100 / $_columns * $i * 1%;
+    }
+  }
+}
+
+// mobile only
+@media screen and (max-width: $breakpoint-tablet - 1px) {
+  .hidden-s,
+  .visible-m,
+  .visible-l {
+    display: none;
+  }
+
+  @for $i from 1 through $_columns {
+    .col-s-offset-#{$i} {
+      margin-left: 100 / $_columns * $i * 1%;
+    }
+  }
+}
+
+
+// tablet only
+@media screen and (min-width: $breakpoint-tablet) and (max-width: $breakpoint-desktop - 1px) {
+  .hidden-m,
+  .visible-s,
+  .visible-l {
+    display: none;
+  }
+
+  @for $i from 1 through $_columns {
+    .col-m-offset-#{$i} {
+      margin-left: 100 / $_columns * $i * 1%;
+    }
+  }
+}
+
+// desktop only
+@media screen and (min-width: $breakpoint-desktop) {
+  .hidden-l,
+  .visible-s,
+  .visible-m {
+    display: none;
+  }
+
+  @for $i from 1 through $_columns {
+    .col-l-offset-#{$i} {
+      margin-left: 100 / $_columns * $i * 1%;
+    }
+  }
+}
+

@@ -1,0 +1,60 @@
+.table-board {
+  $self: &;
+
+  &__content {
+    overflow-x: auto;
+  }
+
+  &__table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  &__table-head {
+    #{$self}__row {
+      background-color: $color-board-header;
+    }
+  }
+
+  &__table-body {
+    background-color: $color-board-header;
+
+    #{$self}__row {
+      background-color: $color-white;
+
+      &:hover {
+        background-color: $color-dropdown;
+      }
+    }
+  }
+
+  &__row {
+    border-bottom: $border;
+    transition: all ease 0.2s;
+  }
+
+  &__item {
+    border-right: $border;
+    padding: 10px;
+
+    &.-center {
+      text-align: center;
+    }
+
+    &.-right {
+      text-align: right;
+    }
+
+    .input,
+    .select {
+      margin-bottom: 0;
+    }
+  }
+
+  &__footer {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+  }
+}

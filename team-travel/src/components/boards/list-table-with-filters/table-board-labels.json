@@ -1,0 +1,15 @@
+{
+    "typeTitle": "Type",
+    "types": ["All", "Driver", "Passenger"],
+    "directionTitle": "Direction",
+    "directions": ["All", "From Vilnius to Kaunas", "From Kaunas to Vilnius"],
+    "passengersTitle": "Passengers",
+    "searchIcon": "icon search",
+    "inputPlaceholder": "All",
+    "fromTitle": "From",
+    "toTitle": "To",
+    "calendarIcon": "icon calendar",
+    "buttonText": "Edit",
+    "leaveButtonText": "Leave"
+
+}

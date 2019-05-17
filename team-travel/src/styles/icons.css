@@ -1,0 +1,194 @@
+.icon {
+    font-size: 10px;
+}
+
+.icon:before {
+    content:' ';
+    vertical-align:middle;
+    display: inline-block;
+    background-image: url("../assets/icons.svg");
+    background-repeat: no-repeat;
+    background-size: 13.8em 21.5em;
+}
+
+  .icon.arrow-blue:before {
+        background-position: 0em 0em;
+        width: 0.7em;
+        height: 1.1em;
+  }
+
+
+  .icon.arrow-blue-mirrored:before {
+        background-position: 0em 0em;
+        width: 0.7em;
+        height: 1.1em;
+        transform: rotate(180deg);
+  }
+
+  .icon.double-arrow-blue:before {
+        background-image: url("../assets/icons/double-arrow-blue.svg");
+        background-position: 0em -0.4em;
+        width: 1em;
+        height: 2em;
+   }
+
+   .icon.double-arrow-blue-mirrored:before {
+        background-image: url("../assets/icons/double-arrow-blue.svg");
+        background-position: 0em -0.5em;
+        width: 1em;
+        height: 2em;
+        transform: rotate(180deg);
+    }
+   
+    @-moz-document url-prefix() {
+        .icon.double-arrow-blue:before {
+            background-position: 0 0.45em;
+        }
+
+        .icon.double-arrow-blue-mirrored:before {
+            background-position: 0 0.35em;
+        }
+    }
+
+  .icon.arrow-down:before {
+        background-position: 0em -1.1em;
+        width: 1.4em;
+        height: 0.9em;
+  }
+
+  .icon.arrow-gray:before {
+      background-position: 0em -2em;
+      width: 0.7em;
+      height: 1.1em;
+  }
+
+  .icon.arrow-white:before {
+      background-position: 0em -3.1em;
+      width: 0.7em;
+      height: 1.1em;
+  }
+
+  .icon.bell:before {
+      background-position: 0em -4.2em;
+      width: 1.6em;
+      height: 2em;
+  }
+
+
+
+
+  .icon.bell-warn:before {
+      background-position: 0em -6.2em;
+      width: 1.6em;
+      height: 2em;
+  }
+
+
+
+
+  .icon.calendar:before {
+      background-position: 0em -8.2em;
+      width: 1.4em;
+      height: 1.5em;
+  }
+
+
+
+
+  .icon.checkmark-gray:before {
+      background-position: 0em -9.7em;
+      width: 1em;
+      height: 1em;
+  }
+
+
+
+
+  .icon.checkmark-white:before {
+      background-position: 0em -10.7em;
+      width: 1em;
+      height: 1em;
+  }
+
+
+
+
+  .icon.clock:before {
+      background-position: 0em -11.7em;
+      width: 1.4em;
+      height: 1.4em;
+  }
+
+
+
+
+  .icon.devbridge-logo:before {
+      background-position: 0em -13.1em;
+      width: 13.8em;
+      height: 2.8em;
+  }
+
+
+
+
+  .icon.info:before {
+      background-position: 0em -15.9em;
+      width: 1.4em;
+      height: 1.4em;
+  }
+
+
+
+
+  .icon.search:before {
+      background-position: 0em -17.3em;
+      width: 1.2em;
+      height: 1.2em;
+  }
+
+
+
+
+  .icon.skip-blue:before {
+      background-position: 0em -18.5em;
+      width: 1.1em;
+      height: 1em;
+  }
+
+
+
+
+  .icon.skip-gray:before {
+      background-position: 0em -19.5em;
+      width: 1.1em;
+      height: 1em;
+  }
+
+
+
+
+  .icon.skip-white:before {
+      background-position: 0em -20.5em;
+      width: 1.1em;
+      height: 1em;
+  }
+
+
+
+
+  .icon.plus:before {
+      background-image: url("../assets/icons/plus.svg");
+      background-size: cover;
+      width: 1.2em;
+      height: 1.2em;
+  }
+
+
+
+
+  .icon.cross:before {
+      background-image: url("../assets/icons/cross.svg");
+      background-size: cover;
+      width: 1.2em;
+      height: 1.2em;
+  }

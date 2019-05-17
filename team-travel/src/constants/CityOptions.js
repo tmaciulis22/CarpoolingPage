@@ -1,0 +1,1 @@
+export default Object.freeze({1:"Vilnius", 2:"Kaunas"});

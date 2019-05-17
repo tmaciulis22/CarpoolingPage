@@ -1,0 +1,14 @@
+{
+    "header": "Filter",
+    "originTitle": "Origin",
+    "destinationTitle": "Destination",
+    "driverTitle": "Driver",
+    "driverPlaceholder": "All",
+    "driverIcon": "icon search",
+    "locationOptions": [
+        "All",
+        "Kaunas",
+        "Vilnius"
+    ],
+    "buttonValue": "Clear filters"
+}

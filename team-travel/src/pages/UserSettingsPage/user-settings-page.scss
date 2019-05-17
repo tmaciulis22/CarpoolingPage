@@ -1,0 +1,15 @@
+.userSettingsPage {
+    margin-bottom: 20px;
+}
+
+.sectionHeader {
+    align-items: center;
+    display: flex;
+    height: 55px;
+    justify-content: space-between;
+    &__errorMessage {
+        float: right;
+        color: red;
+    }
+}
+

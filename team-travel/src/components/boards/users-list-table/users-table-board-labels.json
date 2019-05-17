@@ -1,0 +1,12 @@
+{
+    "fullNameTitle": "Full name",
+    "phoneNumberTitle": "Phone number",
+    "emailTitle": "Email",
+    "slackTitle": "SlackId",
+    "mainOfficeTitle": "Main office",
+    "userRoleTitle": "User role",
+    "carPlateTitle": "Car plate",
+    "searchIcon": "icon search",
+    "inputPlaceholder": "All", 
+    "buttonText": "Edit"
+}

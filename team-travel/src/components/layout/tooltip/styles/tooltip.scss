@@ -1,0 +1,45 @@
+@import "../../../../styles/settings/colors";
+
+.tooltip {
+  $_background: rgba(28, 46, 54, 0.8);
+  position: relative;
+  z-index: 1;
+
+  &__launcher {
+    color: $color-accent;
+    cursor: pointer;
+  }
+
+  &__launcher:hover ~ &__content {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &__content {
+    background-color: $_background;
+    border-radius: 3px;
+    color: $color-white;
+    left: 0;
+    margin-left: -130px;
+    margin-top: 12px;
+    opacity: 0;
+    padding: 10px 20px;
+    position: absolute;
+    text-align: center; 
+    transition: all ease 0.2s;
+    visibility: hidden;
+    width: 260px;
+
+    &::before {
+      border-color: transparent transparent $_background;
+      border-style: solid;
+      border-width: 0 4px 6px;
+      content: '';
+      height: 0;
+      left: 133px;
+      position: absolute;
+      top: -6px;
+      width: 0;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+body {
+  background-color: $color-background;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.reverse {
+  transform: rotateZ(180deg);
+}
+
+a {
+  color: $color-accent;
+
+  &:hover {
+    text-decoration: none;
+  }
+}

@@ -1,0 +1,23 @@
+{
+    "carpoolingTitle": "Carpooling",
+    "registrationTitle": "Registration form",
+    "failMessage": "Registration failed: ",
+    "emailPlaceholder": "user@email.com",
+    "emailTitle": "Email *",
+    "passwordPlaceholder": "•••••••••",
+    "passwordTitle": "Password *",
+    "repeatPasswordTitle": "Repeat password *",
+    "passwordHelperTitle": "Password must contain at least one upper case letter and a digit and be at least 8 characters long",
+    "namePlaceholder": "Name",
+    "nameTitle": "Your name *",
+    "surnamePlaceholder": "Surname",
+    "surnameTitle": "Your surname *",
+    "slackPlaceholder": "slackId",
+    "slackTitle": "Slack Id",
+    "carPlatePlaceholder": "AAA000",
+    "carPlateTitle": "Car plate",
+    "phonePlaceholder": "+37000000000",
+    "phoneTitle": "Phone number",
+    "backButtonValue": "Go back",
+    "submitButtonValue": "Register"
+}

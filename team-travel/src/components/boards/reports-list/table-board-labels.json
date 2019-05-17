@@ -1,0 +1,9 @@
+{
+    "driver": "Driver",
+    "origin": "Origin",
+    "destination": "Destination",
+    "passengers": "Passengers",
+    "date": "Date",
+    "status": "Status",
+    "carType": "Car"
+}

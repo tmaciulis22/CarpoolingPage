@@ -1,0 +1,34 @@
+.floatRight{
+    
+    float:right;
+}
+
+.floatLeft{
+    float:left;
+}
+
+.title{
+   text-align: left;
+}
+
+.errorMessage{
+    float:left;
+    color: red;
+     text-align: left;
+}
+
+.board-container.login-page{
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    
+}
+
+.centerObject{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20%;
+
+    text-align: center;
+    max-width: 450px;
+}

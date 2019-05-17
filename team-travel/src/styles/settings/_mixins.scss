@@ -1,0 +1,14 @@
+@mixin hover($duration: .2s, $property: all) {
+  transition: ease $property $duration;
+}
+
+@mixin respond-to($media) {
+  @media only screen and (min-width: $media) { @content; }
+}
+
+@mixin outline($color: #4d90fe) {
+  -webkit-box-shadow: 0px 0px 5px $color;
+  border: 1px solid $color;
+  box-shadow: 0px 0px 5px $color;
+  outline: none;
+}

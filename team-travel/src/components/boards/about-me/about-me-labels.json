@@ -1,0 +1,27 @@
+{
+    "boardHeader": "About me",
+    "buttonValue": "Save",
+    "namePlaceholder": "Name Surname",
+    "nameTitle": "Full Name",
+    "phonePlaceholder": "8 600 00000",
+    "phoneTitle": "Phone number",
+    "phoneHelperTitle": "Minimum 4 digits, only symbols (, ),  , +, -, /, ., : are allowed",
+    "slackPlaceholder": "slackId",
+    "slackTitle": "Slack ID",
+    "officeTitle": "Main office",
+    "driverOptions": [
+        "Yes",
+        "No"
+    ],
+    "driverTitle": "Are you a driver",
+    "platesPlaceholder": "AAA 000",
+    "platesTitle": "Car plates",
+    "platesHelperTitle": "Only letters and numbers allowed",
+    "platesError": "Provide a valid car plate!",
+    "changePasswordHeader": "Change password",
+    "passwordPlaceholder": "•••••••••",
+    "oldPasswordTitle": "Old password",
+    "oldPasswordHelperTitle": "Input must match current password",
+    "newPasswordTitle": "New password",
+    "newPasswordHelperTitle": "Minimum 8 characters, at least one upper case letter and a digit"
+}

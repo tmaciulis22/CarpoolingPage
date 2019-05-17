@@ -1,0 +1,20 @@
+.reportsPage {
+    margin-bottom: 20px;
+
+    &__header {
+        width: 100%;
+  
+        &__layout {
+        align-items: center;
+        display: flex;
+        height: 55px;
+        justify-content: space-between;
+        }
+    
+        &__right-side {
+        align-items: center;
+        display: flex;
+        height: 100%;
+        }
+    }
+}

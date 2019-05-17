@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="20" viewBox="0 0 16 20">
+  <g id="bell-warn" transform="translate(-59 -1391.965)">
+    <g id="bell" transform="translate(2.103 1385)">
+      <g id="Group_99" data-name="Group 99" transform="translate(56.897 6.965)">
+        <g id="Group_98" data-name="Group 98" transform="translate(0)">
+          <path id="Path_1" data-name="Path 1" d="M175.207,404.514c0,.006,0,.011,0,.017a2.508,2.508,0,1,0,5.017,0c0-.006,0-.011,0-.017Z" transform="translate(-169.715 -387.039)" fill="#7b8c90"/>
+          <path id="Path_2" data-name="Path 2" d="M67.3,14.459l-2.2-3.094V7.5a5.433,5.433,0,0,0-4.507-5.263V1.052a1.1,1.1,0,0,0-2.2,0V2.241A5.434,5.434,0,0,0,53.887,7.5v3.861l-2.2,3.094a1.026,1.026,0,0,0-.064,1.1,1.119,1.119,0,0,0,.983.567H66.382a1.119,1.119,0,0,0,.983-.567A1.026,1.026,0,0,0,67.3,14.459Z" transform="translate(-51.493)" fill="#7b8c90"/>
+        </g>
+      </g>
+    </g>
+    <g id="Ellipse_1" data-name="Ellipse 1" transform="translate(67 1396)" fill="#404ced" stroke="#fff" stroke-width="1">
+      <circle cx="4" cy="4" r="4" stroke="none"/>
+      <circle cx="4" cy="4" r="3.5" fill="none"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,30 @@
+{
+    "boardHeader": "Filter",
+    "originTitle": "Origin",
+    "destinationTitle": "Destination",
+    "locationOptions": [
+        "All",
+        "Vilnius",
+        "Kaunas"
+    ],
+    "fromDateTitle": "From",
+    "toDateTitle": "To",
+    "calendarIcon": "icon calendar",
+    "driverTitle": "Driver",
+    "driverPlaceholder": "All",
+    "driverIcon": "icon search",
+    "carTitle": "Car",
+    "carOptions": [
+        "All",
+        "Personal",
+        "Rental"
+    ],
+    "statusTitle": "Status",
+    "statusOptions": [
+        "All",
+        "Completed",
+        "Active",
+        "Canceled"
+    ],
+    "buttonValue": "Clear filters"
+}

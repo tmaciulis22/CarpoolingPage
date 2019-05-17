@@ -1,0 +1,1 @@
+export default Object.freeze({1:"User", 2:"Manager", 3:"Admin"});

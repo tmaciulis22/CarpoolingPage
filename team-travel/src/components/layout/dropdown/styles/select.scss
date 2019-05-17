@@ -1,0 +1,71 @@
+@import "../../../../styles/settings/colors";
+@import '../../../../styles/settings/sizes';
+@import '../../../../styles/settings/mixins';
+
+.select {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+  width: 100%;
+
+  &.-warn {
+    select {
+      border: 1px solid $color-warning;
+    }
+  }
+
+  &__label {
+    align-items: center;
+    display: inline-flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    width: 100%;
+
+    &-left {
+      align-items: center;
+      display: inline-flex;
+    }
+
+    .title {
+      color: $color-black;
+      font-size: .8rem;
+      font-weight: 600;
+      margin-right: 5px;
+      padding: 1px 0;
+
+      @include respond-to($breakpoint-tablet) {
+        font-size: .875rem;
+      }
+    }
+  }
+
+  &__field {
+    position: relative;
+
+    select {
+      appearance: none;
+      background-color: $color-white;
+      border: $border;
+      border-radius: 3px;
+      box-sizing: border-box;
+      font-size: 0.875rem;
+      padding: 7px 40px 7px 15px;
+      width: 100%;
+
+      &:placeholder {
+        color: $color-disabled;
+        font-weight: 400;
+      }
+    }
+
+    span {
+      align-items: center;
+      display: flex;
+      height: 100%;
+      position: absolute;
+      right: 15px;
+      top: 0;
+      width: auto;
+    }
+  }
+}

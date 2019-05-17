@@ -1,0 +1,9 @@
+{
+    "driver": "Driver",
+    "origin": "Origin",
+    "destination": "Destination",
+    "passengers": "Passengers",
+    "time": "Time",
+    "availableSeats": "Available seats",
+    "buttonText": "Join"
+}

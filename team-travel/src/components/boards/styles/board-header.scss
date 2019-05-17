@@ -1,0 +1,15 @@
+@import "../../../styles/settings/_colors.scss";
+
+.board-header {
+  align-items: center;
+  background-color: $color-board-header;
+  border-bottom: $border;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}

@@ -1,0 +1,42 @@
+@import "../../../../styles/settings/colors";
+
+
+.header {
+  min-height: 35px;
+  background-color: #f1f1f1;
+  padding: 20px 10px;
+  margin: auto;
+  max-width: 1112px;
+}
+
+.header-element {
+  float: left;
+  padding: 2px 12px 0px 12px;
+  text-decoration: none;
+  line-height: 25px;
+  align-items: center;
+  
+}
+
+.header-right {
+  float: right;
+}
+
+@media screen and (max-width: 500px) {
+  .header-element {
+    
+    display: inline-block;
+    line-height: 2.5;
+    vertical-align: bottom;
+  }
+  .header{
+    display: flex;
+        width:100%;
+        margin: 5px;
+        flex-direction: column;
+        justify-content: space-between;
+  }
+  .header-right {
+    float: none;
+  }
+}
