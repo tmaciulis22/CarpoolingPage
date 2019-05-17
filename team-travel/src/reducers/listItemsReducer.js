@@ -101,12 +101,12 @@ export default (state = initialState, action) => {
                     switch(filter) {
                         case 'dateFrom':
                             tripsAfterFullFiltering = tripsAfterFullFiltering.filter((trip) => {
-                                return moment(trip['date']).isSameOrAfter(moment(filtersTemp[filter]))
+                                return moment(trip['date']).isSameOrAfter(moment(filtersTemp[filter]), 'day')
                             });
                             break;
                         case 'dateTo':
                             tripsAfterFullFiltering = tripsAfterFullFiltering.filter((trip) => {
-                                return moment(trip['date']).isSameOrBefore(moment(filtersTemp[filter]))
+                                return moment(trip['date']).isSameOrBefore(moment(filtersTemp[filter]), 'day')
                             });
                             break;
                         case 'date':

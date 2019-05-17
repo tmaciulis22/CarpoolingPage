@@ -14,6 +14,7 @@ import moment from 'moment';
 class AddTrip extends Component {
     constructor(props) {
         super(props);
+        moment.locale('LT');
         this.state = {
             destination: this.props.userData.mainOffice === CityOptions[1] ? CityOptions[2]: CityOptions[1],
             leavingDate: '',
@@ -179,7 +180,7 @@ class AddTrip extends Component {
 
     checkIfValidLeavingDate(current){
         var yesterday = moment().subtract( 1, 'day' );
-        return current.isAfter( yesterday );
+        return current.isAfter( yesterday, 'day' );
     }
 
     checkIfValidReturnDate(current){
@@ -217,6 +218,7 @@ class AddTrip extends Component {
                             value={this.state.leavingDate}
                             onChange={this.handleLeavingDatetimeChange}
                             isValidDate={this.checkIfValidLeavingDate}
+                            timeFormat={'HH:mm'}
                         />
                     </div>
                     <div className="col-s-6">
@@ -235,6 +237,7 @@ class AddTrip extends Component {
                             onChange={this.handleReturnDatetimeChange}
                             onCheck={this.handleReturnInputCheck}
                             isValidDate={this.checkIfValidReturnDate}
+                            timeFormat={'HH:mm'}
                         />
                     </div>
                 </div>
