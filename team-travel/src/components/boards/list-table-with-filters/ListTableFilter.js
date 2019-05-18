@@ -11,6 +11,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { clearFilters } from '../../../actions/tripsListActions';
 import CITY_OPTIONS from './../../../constants/CityOptions';
+import DatetimePicker from './../../layout/DatetimePicker/DatetimePicker';
+import moment from 'moment';
 
 class ListTableFilter extends Component{
     constructor(props){
@@ -48,6 +50,8 @@ class ListTableFilter extends Component{
         this.handleSkipToLast = this.handleSkipToLast.bind(this);
         this.renderBody = this.renderBody.bind(this);
         this.renderHead = this.renderHead.bind(this);
+        this.checkIfValidFromDate = this.checkIfValidFromDate.bind(this);
+        this.checkIfValidToDate = this.checkIfValidToDate.bind(this);
     }
 
     static PAGE_SIZE = 5;
@@ -102,12 +106,12 @@ class ListTableFilter extends Component{
                             break;
                         case "fromDate":
                             filteredRows = filteredRows.filter(row =>
-                                (new Date(row.date+'Z').getTime()) >= (new Date(filterValue+'Z').getTime())  
+                                moment(row.date).isSameOrAfter(moment(filterValue), 'day') 
                             );
                             break;
                         case "toDate":
                             filteredRows = filteredRows.filter(row =>
-                                (new Date(row.date+'Z').getTime()) <= (new Date(filterValue+'Z').getTime())   
+                                moment(row.date).isSameOrBefore(moment(filterValue), 'day') 
                             );     
                             break;
                         default:
@@ -166,12 +170,14 @@ class ListTableFilter extends Component{
         this.filterRows("passengers", e.target.value);
     }
 
-    handleFromDateChange(e) {
-        this.filterRows("fromDate", e.target.value);
+    handleFromDateChange(date) {
+        typeof date === "string" || 
+        this.filterRows("fromDate", date.toDate());
     }
 
-    handleToDateChange(e) {
-        this.filterRows("toDate", e.target.value);
+    handleToDateChange(date) {
+        typeof date === "string" ||
+        this.filterRows("toDate", date.toDate());
     }
 
     handleSkipToFirst() {
@@ -247,6 +253,14 @@ class ListTableFilter extends Component{
         );
     }
     
+    checkIfValidFromDate(current){
+        return !!this.state.toDate ? current.isSameOrBefore( this.state.toDate, 'day' ) : true;
+    }
+
+    checkIfValidToDate(current){
+        return !!this.state.fromDate ? current.isSameOrAfter( this.state.fromDate, 'day' ) : true;
+    }
+
     renderHead(){
         let alwaysTrueErrorList = {
             noError : true
@@ -289,31 +303,37 @@ class ListTableFilter extends Component{
                         {this.generateInputDataList(this.state.bodyRows)}
                     </td> 
                     <td className="table-board__item"> 
-                        <Input 
-                            input={{
-                                type: "date",
-                                name:"from",
-                                onChange: this.handleFromDateChange,
-                                max: !!this.state.toDate ? this.state.toDate : null,
-                                value: this.state.fromDate
-                            }}
+                        <DatetimePicker 
                             title={labels.fromTitle}
-                            icon={labels.calendarIcon}
                             errorList={alwaysTrueErrorList}
+                            input={{
+                                name: "fromDate",
+                                id: !!this.props.isActive ? "fromDate_id1" : "fromDate_id2",
+                                placeholder: "mm/dd/yyyy",
+                                autoComplete: "off"
+                            }}
+                            value={this.state.fromDate}
+                            onChange={this.handleFromDateChange}
+                            isValidDate={this.checkIfValidFromDate}
+                            timeFormat={false}
+                            closeOnSelect={true}
                         />
                     </td> 
                     <td className="table-board__item"> 
-                        <Input 
-                            input={{
-                                type: "date",
-                                name:"to",
-                                onChange: this.handleToDateChange,
-                                min: !!this.state.fromDate ? this.state.fromDate : null,
-                                value: this.state.toDate
-                            }}
+                        <DatetimePicker 
                             title={labels.toTitle}
-                            icon={labels.calendarIcon}
                             errorList={alwaysTrueErrorList}
+                            input={{
+                                name: "toDate",
+                                id: !!this.props.isActive ? "toDate_id1" : "toDate_id2",
+                                placeholder: "mm/dd/yyyy",
+                                autoComplete: "off"
+                            }}
+                            value={this.state.toDate}
+                            onChange={this.handleToDateChange}
+                            isValidDate={this.checkIfValidToDate}
+                            timeFormat={false}
+                            closeOnSelect={true}
                         />
                     </td>
                     {this.props.isActive && (<td className={"table-board__item"} />) }

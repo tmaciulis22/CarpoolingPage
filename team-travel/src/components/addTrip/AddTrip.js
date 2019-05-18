@@ -14,6 +14,7 @@ import moment from 'moment';
 class AddTrip extends Component {
     constructor(props) {
         super(props);
+        moment.locale('LT');
         this.state = {
             destination: this.props.userData.mainOffice === CityOptions[1] ? CityOptions[2]: CityOptions[1],
             leavingDate: '',
@@ -86,7 +87,7 @@ class AddTrip extends Component {
             errors: {
                 ...this.state.errors,
                 leavingDate: !(!this.state.leavingDate // not empty
-                    || moment(inputLeavingDate).isSameOrBefore(todayDate)), // not the date from the past
+                    || !moment(inputLeavingDate).isAfter(todayDate, 'minute')), // not the date from the past
 
                 availableSeats: !!this.state.availableSeats && !(Number(this.state.availableSeats) < 0) && Number.isInteger(Number(this.state.availableSeats))
             }
@@ -96,8 +97,8 @@ class AddTrip extends Component {
                     errors: {
                         ...this.state.errors,
                         returnDate: !(!this.state.returnDate // not empty
-                            || moment(inputReturnDate).isSameOrBefore(inputLeavingDate) // not sooner than leaving date
-                            || moment(inputReturnDate).isSameOrBefore(todayDate)), // not the date from the past
+                            || !moment(inputReturnDate).isAfter(inputLeavingDate, 'minute') // not sooner than leaving date
+                            || !moment(inputReturnDate).isAfter(todayDate, 'minute')), // not the date from the past
                     }
                 }, () => {
                     this.submitTrip();
@@ -179,11 +180,11 @@ class AddTrip extends Component {
 
     checkIfValidLeavingDate(current){
         var yesterday = moment().subtract( 1, 'day' );
-        return current.isAfter( yesterday );
+        return current.isAfter( yesterday, 'day' );
     }
 
     checkIfValidReturnDate(current){
-        return current.isSameOrAfter( this.state.leavingDate, 'minute' );
+        return current.isSameOrAfter( this.state.leavingDate, 'day' );
     }
 
     render() {
@@ -217,6 +218,7 @@ class AddTrip extends Component {
                             value={this.state.leavingDate}
                             onChange={this.handleLeavingDatetimeChange}
                             isValidDate={this.checkIfValidLeavingDate}
+                            timeFormat={'HH:mm'}
                         />
                     </div>
                     <div className="col-s-6">
@@ -235,6 +237,7 @@ class AddTrip extends Component {
                             onChange={this.handleReturnDatetimeChange}
                             onCheck={this.handleReturnInputCheck}
                             isValidDate={this.checkIfValidReturnDate}
+                            timeFormat={'HH:mm'}
                         />
                     </div>
                 </div>

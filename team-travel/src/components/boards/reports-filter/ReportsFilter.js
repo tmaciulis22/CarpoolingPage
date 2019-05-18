@@ -135,12 +135,11 @@ class ReportsFilter extends Component {
     }
 
     checkIfValidFromDate(current){
-        var yesterday = moment().subtract( 1, 'day' );
-        return current.isAfter( yesterday );
+        return !!this.state.toDate ? current.isSameOrBefore( this.state.toDate, 'day' ) : true;
     }
 
     checkIfValidToDate(current){
-        return current.isSameOrAfter( this.state.leavingDate );
+        return !!this.state.fromDate ? current.isSameOrAfter( this.state.fromDate, 'day' ) : true;
     }
 
     clearFilters(){
@@ -211,6 +210,7 @@ class ReportsFilter extends Component {
                                     onChange={this.handleFromDateChange}
                                     isValidDate={this.checkIfValidFromDate}
                                     timeFormat={false}
+                                    closeOnSelect={true}
                                 />
                             </div>
                             <div className="col-s-12 col-m-6 col-l-4">
@@ -227,6 +227,7 @@ class ReportsFilter extends Component {
                                     onChange={this.handleToDateChange}
                                     isValidDate={this.checkIfValidToDate}
                                     timeFormat={false}
+                                    closeOnSelect={true}
                                 />
                             </div>
                             <div className="col-s-12 col-m-6 col-l-4" >

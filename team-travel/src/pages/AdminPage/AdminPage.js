@@ -35,7 +35,6 @@ class AdminPage extends Component {
                     <div className="sectionHeader">
                         <h1>{labels.adminPanel}</h1>
                     </div>
-                    <div className="sectionHeader">{labels.allUsers}</div>
                     <UsersListTableFilter
                         border={true}
                         bodyRows={this.props.userDataAdmin}
