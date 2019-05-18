@@ -308,7 +308,7 @@ class ListTableFilter extends Component{
                             errorList={alwaysTrueErrorList}
                             input={{
                                 name: "fromDate",
-                                id: "fromDate_id",
+                                id: !!this.props.isActive ? "fromDate_id1" : "fromDate_id2",
                                 placeholder: "mm/dd/yyyy",
                                 autoComplete: "off"
                             }}
@@ -325,7 +325,7 @@ class ListTableFilter extends Component{
                             errorList={alwaysTrueErrorList}
                             input={{
                                 name: "toDate",
-                                id: "toDate_id",
+                                id: !!this.props.isActive ? "toDate_id1" : "toDate_id2",
                                 placeholder: "mm/dd/yyyy",
                                 autoComplete: "off"
                             }}

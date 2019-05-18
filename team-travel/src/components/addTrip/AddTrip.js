@@ -87,7 +87,7 @@ class AddTrip extends Component {
             errors: {
                 ...this.state.errors,
                 leavingDate: !(!this.state.leavingDate // not empty
-                    || moment(inputLeavingDate).isSameOrBefore(todayDate)), // not the date from the past
+                    || !moment(inputLeavingDate).isAfter(todayDate, 'minute')), // not the date from the past
 
                 availableSeats: !!this.state.availableSeats && !(Number(this.state.availableSeats) < 0) && Number.isInteger(Number(this.state.availableSeats))
             }
@@ -97,8 +97,8 @@ class AddTrip extends Component {
                     errors: {
                         ...this.state.errors,
                         returnDate: !(!this.state.returnDate // not empty
-                            || moment(inputReturnDate).isSameOrBefore(inputLeavingDate) // not sooner than leaving date
-                            || moment(inputReturnDate).isSameOrBefore(todayDate)), // not the date from the past
+                            || !moment(inputReturnDate).isAfter(inputLeavingDate, 'minute') // not sooner than leaving date
+                            || !moment(inputReturnDate).isAfter(todayDate, 'minute')), // not the date from the past
                     }
                 }, () => {
                     this.submitTrip();
@@ -184,7 +184,7 @@ class AddTrip extends Component {
     }
 
     checkIfValidReturnDate(current){
-        return current.isSameOrAfter( this.state.leavingDate, 'minute' );
+        return current.isSameOrAfter( this.state.leavingDate, 'day' );
     }
 
     render() {

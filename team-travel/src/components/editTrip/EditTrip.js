@@ -10,6 +10,8 @@ import CityOptions from '../../constants/CityOptions.js';
 import CarOptions from '../../constants/CarOptions.js';
 import TripStatus from '../../constants/TripStatus.js';
 import {notifyUpdateTrip, notifyCancelTrip, notifyDeclineTrip} from "../../actions/notificationsActions";
+import DatetimePicker from './../layout/DatetimePicker/DatetimePicker';
+import moment from 'moment';
 
 class EditTrip extends Component {
     constructor(props) {
@@ -20,9 +22,7 @@ class EditTrip extends Component {
             isReturnCheckboxChecked: false,
             errors: {
                 leavingDate: true,
-                leavingTime: true,
                 returnDate: true,
-                returnTime: true,
                 availableSeats: true
             },
         };
@@ -32,13 +32,13 @@ class EditTrip extends Component {
         this.handleEditTrip = this.handleEditTrip.bind(this);
         this.handleCommentChange = this.handleCommentChange.bind(this);
         this.handleDestinationChange = this.handleDestinationChange.bind(this);
-        this.handleLeavingdateChange = this.handleLeavingdateChange.bind(this);
-        this.handleReturnDateChange = this.handleReturnDateChange.bind(this);
         this.handleAvailableSeatsChange = this.handleAvailableSeatsChange.bind(this);
         this.handleCarOptionsChange = this.handleCarOptionsChange.bind(this);
-        this.handleLeavingTimeChange = this.handleLeavingTimeChange.bind(this);
-        this.handleReturnTimeChange = this.handleReturnTimeChange.bind(this);
         this.handleReturnInputCheck = this.handleReturnInputCheck.bind(this);
+        this.handleReturnDatetimeChange = this.handleReturnDatetimeChange.bind(this);
+        this.handleLeavingDatetimeChange = this.handleLeavingDatetimeChange.bind(this);
+        this.checkIfValidLeavingDate = this.checkIfValidLeavingDate.bind(this);
+        this.checkIfValidReturnDate = this.checkIfValidReturnDate.bind(this);
         this.checkPassengers = this.checkPassengers.bind(this);
         this.findError = this.findError.bind(this);
         this.leaveTrip = this.leaveTrip.bind(this);
@@ -64,35 +64,26 @@ class EditTrip extends Component {
     }
 
     findError() {
-        let todayDate = new Date();
-        let inputLeavingDate = new Date(String(this.state.row.date + "T" + this.state.time));
-        let inputReturnDate = new Date(String(this.state.row.dateOfReturn + "T" + this.state.row.timeOfReturn));
-        let todayDateNoTime = new Date().setHours(0, 0, 0, 0);
-        let inputLeavingDateNoTime = new Date(this.state.row.date).setHours(0, 0, 0, 0);
-        let inputReturnDateNoTime = new Date(this.state.row.dateOfReturn).setHours(0, 0, 0, 0);
+        let todayDate = moment().toDate(moment());
+        let inputLeavingDate = this.state.row.leavingDate;
+        let inputReturnDate = this.state.row.returnDate;
 
         this.setState({
             errors: {
                 ...this.state.errors,
-                leavingDate: !(this.state.row.date === "" // not empty
-                    || inputLeavingDateNoTime < todayDateNoTime), // not the date from the past
-
-                leavingTime: !(this.state.row.time === "" // not empty
-                    || ((todayDateNoTime === inputLeavingDateNoTime) && inputLeavingDate <= todayDate)), // if date is today, time isn't from the past
+                leavingDate: !(!this.state.row.leavingDate // not empty
+                    || !moment(inputLeavingDate).isAfter(todayDate, 'minute')), // not the date from the past
 
                 availableSeats: !!this.state.row.availableSeats && !(Number(this.state.row.availableSeats) < 0) && Number.isInteger(Number(this.state.row.availableSeats))
             }
         }, () => {
             if (this.state.isReturnCheckboxChecked) {
-                this.setState({
+                this.setState( {
                     errors: {
                         ...this.state.errors,
-                        returnDate: !(!this.state.row.dateOfReturn // not empty
-                            || inputReturnDateNoTime < inputLeavingDateNoTime // not sooner than leaving date
-                            || inputReturnDateNoTime < todayDateNoTime), // not the date from the past
-
-                        returnTime: !(!this.state.row.timeOfReturn // not empty
-                            || ((inputLeavingDateNoTime === inputReturnDateNoTime) && (inputReturnDate <= inputLeavingDate))), // if dates are the same, time isn't from the past
+                        returnDate: !(!this.state.row.returnDate // not empty
+                            || !moment(inputReturnDate).isAfter(inputLeavingDate, 'minute') // not sooner than leaving date
+                            || !moment(inputReturnDate).isAfter(todayDate, 'minute')), // not the date from the past
                     }
                 }, () => {
                     this.handleEditTrip();
@@ -152,9 +143,7 @@ class EditTrip extends Component {
             isReturnCheckboxChecked: false,
             errors: {
                 leavingDate: true,
-                leavingTime: true,
                 returnDate: true,
-                returnTime: true,
                 availableSeats: true
             }
         });
@@ -162,14 +151,16 @@ class EditTrip extends Component {
 
     handleEditTrip = () => {
         if (!Object.values(this.state.errors).includes(false)) {
+            const leavingDate = moment(this.state.row.leavingDate).format();
+            const returnDate = !!this.state.row.returnDate ? moment(this.state.row.returnDate).format() : null;
             let succeeded = this.props.handleEditTrip({
                 trip: {
                     id: this.state.row.id,
                     driverId: this.state.row.driverID,
                     origin: this.state.row.destination === CityOptions[1] ? CityOptions[2] : CityOptions[1],
                     destination: this.state.row.destination,
-                    leavingDate: this.state.row.date + "T" + this.state.row.time,
-                    returnDate: !this.state.row.dateOfReturn ? null : (this.state.row.dateOfReturn + "T" + this.state.row.timeOfReturn),
+                    leavingDate: leavingDate,
+                    returnDate: returnDate,
                     maxSeats: (Number(this.state.row.availableSeats) + (!!this.state.row.passengers.length ? this.state.row.passengers.length : 0)),
                     carPlate: this.state.row.carPlate === CarOptions[2] ? null : this.state.row.carPlate,
                     carType: this.state.row.carPlate === CarOptions[2] ? CarOptions[2] : CarOptions[1],
@@ -204,38 +195,29 @@ class EditTrip extends Component {
             }
         });
     }
-    handleLeavingdateChange(e) {
+
+    handleLeavingDatetimeChange(date){
+        typeof date === "string" ||
         this.setState({
             row: {
                 ...this.state.row,
-                date: e.target.value
+                leavingDate: date.toDate(),
+            },
+            errors: {
+                leavingDate: true,
             }
         });
     }
 
-    handleLeavingTimeChange(e) {
+    handleReturnDatetimeChange(date){
+        typeof date === "string" ||
         this.setState({
             row: {
                 ...this.state.row,
-                time: e.target.value
-            }
-        });
-    }
-
-    handleReturnTimeChange(e) {
-        this.setState({
-            row: {
-                ...this.state.row,
-                timeOfReturn: e.target.value
-            }
-        });
-    }
-
-    handleReturnDateChange(e) {
-        this.setState({
-            row: {
-                ...this.state.row,
-                dateOfReturn: e.target.value
+                returnDate: date.toDate(),
+            },
+            errors: {
+                returnDate: true,
             }
         });
     }
@@ -259,28 +241,33 @@ class EditTrip extends Component {
     }
 
     handleReturnInputCheck() {
-        const dateToBeCleared = '2000-01-01';
-        const timeToBeCleared = '00:00';
+        const dateToBeCleared = new Date();
         this.setState({
             isReturnCheckboxChecked: !this.state.isReturnCheckboxChecked,
             row: {
                 ...this.state.row,
-                dateOfReturn: dateToBeCleared,
-                timeOfReturn: timeToBeCleared
+                returnDate: dateToBeCleared,
             },
             errors: {
                 ...this.state.errors,
                 returnDate: true,
-                returnTime: true,
             }
         }, () => this.setState({
             row: {
                 ...this.state.row,
-                dateOfReturn: '',
-                timeOfReturn: ''
+                returnDate: ''
             },
         }));
     };
+
+    checkIfValidLeavingDate(current){
+        var yesterday = moment().subtract( 1, 'day' );
+        return current.isAfter( yesterday, 'day' );
+    }
+
+    checkIfValidReturnDate(current){
+        return current.isSameOrAfter( moment(this.state.row.leavingDate).toDate(), 'day' );
+    }
 
     render() {
 
@@ -301,71 +288,39 @@ class EditTrip extends Component {
                     </div>
                     <div className="row">
                         <div className="col-s-6">
-                            <Input
+                            <DatetimePicker 
                                 title={"When are you leaving *"}
+                                errorList={{ leavingDate: this.state.errors.leavingDate}}
                                 input={{
-                                    type: "date",
                                     name: "leavingDate",
                                     id: "leavingDate_id",
-                                    placeholder: "leavingDate...",
-                                    onChange: this.handleLeavingdateChange,
-                                    value: this.state.row.date,
-                                    required: true
+                                    placeholder: "mm/dd/yyyy hh:mm",
+                                    required:true,
+                                    autoComplete: "off"
                                 }}
-                                icon={"icon calendar"}
-                                errorList={{ leavingDate: this.state.errors.leavingDate }}
+                                value={moment(this.state.row.leavingDate).toDate()}
+                                onChange={this.handleLeavingDatetimeChange}
+                                isValidDate={this.checkIfValidLeavingDate}
+                                timeFormat={'HH:mm'}
                             />
                         </div>
                         <div className="col-s-6">
-                            <Input
-                                title={'\u00A0'}
-                                input={{
-                                    type: "time",
-                                    name: "leavingTime",
-                                    id: "leavingTime_id",
-                                    placeholder: "leavingTime...",
-                                    onChange: this.handleLeavingTimeChange,
-                                    value: this.state.row.time,
-                                    required: true,
-                                }}
-                                icon={"icon clock"}
-                                errorList={{ leavingTime: this.state.errors.leavingTime }}
-                            />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-s-6">
-                            <Input
-                                title={'Return'}
+                            <DatetimePicker 
+                                title={"Return"}
                                 checkbox={true}
-                                checkboxChecked={this.state.isReturnCheckboxChecked}
+                                errorList={{ returnDate: this.state.errors.returnDate}}
                                 input={{
-                                    type: "date",
                                     name: "returnDate",
                                     id: "returnDate_id",
-                                    placeholder: "returnDate...",
-                                    onChange: this.handleReturnDateChange,
-                                    value: this.state.row.dateOfReturn,
+                                    placeholder: "mm/dd/yyyy hh:mm",
+                                    required: true,
+                                    autoComplete: "off"
                                 }}
+                                value={!!this.state.row.returnDate ? moment(this.state.row.returnDate).toDate() : null}
+                                onChange={this.handleReturnDatetimeChange}
                                 onCheck={this.handleReturnInputCheck}
-                                icon={"icon calendar"}
-                                errorList={{ returnDate: this.state.errors.returnDate }}
-                            />
-                        </div>
-                        <div className="col-s-6">
-                            <Input
-                                title={'\u00A0'}
-                                input={{
-                                    type: "time",
-                                    name: "returnTime",
-                                    id: "returnTime_id",
-                                    placeholder: "returnTime...",
-                                    onChange: this.handleReturnTimeChange,
-                                    value: this.state.row.timeOfReturn,
-                                    disabled: !this.state.isReturnCheckboxChecked,
-                                }}
-                                icon={"icon clock"}
-                                errorList={{ returnTime: this.state.errors.returnTime }}
+                                isValidDate={this.checkIfValidReturnDate}
+                                timeFormat={'HH:mm'}
                             />
                         </div>
                     </div>
