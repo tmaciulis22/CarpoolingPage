@@ -135,11 +135,11 @@ class ReportsFilter extends Component {
     }
 
     checkIfValidFromDate(current){
-        return current.isSameOrBefore( this.state.toDate, 'day' );
+        return !!this.state.toDate ? current.isSameOrBefore( this.state.toDate, 'day' ) : true;
     }
 
     checkIfValidToDate(current){
-        return current.isSameOrAfter( this.state.fromDate, 'day' );
+        return !!this.state.fromDate ? current.isSameOrAfter( this.state.fromDate, 'day' ) : true;
     }
 
     clearFilters(){
