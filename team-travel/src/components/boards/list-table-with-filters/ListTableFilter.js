@@ -11,6 +11,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { clearFilters } from '../../../actions/tripsListActions';
 import CITY_OPTIONS from './../../../constants/CityOptions';
+import DatetimePicker from './../../layout/DatetimePicker/DatetimePicker';
+import moment from 'moment';
 
 class ListTableFilter extends Component{
     constructor(props){
@@ -289,7 +291,7 @@ class ListTableFilter extends Component{
                         {this.generateInputDataList(this.state.bodyRows)}
                     </td> 
                     <td className="table-board__item"> 
-                        <Input 
+                        {/* <Input 
                             input={{
                                 type: "date",
                                 name:"from",
@@ -300,6 +302,21 @@ class ListTableFilter extends Component{
                             title={labels.fromTitle}
                             icon={labels.calendarIcon}
                             errorList={alwaysTrueErrorList}
+                        /> */}
+                        <DatetimePicker 
+                            title={labels.fromTitle}
+                            errorList={alwaysTrueErrorList}
+                            input={{
+                                name: "from",
+                                id: "from_id",
+                                placeholder: "mm/dd/yyyy",
+                                autoComplete: "off"
+                            }}
+                            value={this.state.fromDate}
+                            onChange={this.handleFromDateChange}
+                            isValidDate={this.checkIfValidFromDate}
+                            timeFormat={false}
+                            closeOnSelect={true}
                         />
                     </td> 
                     <td className="table-board__item"> 
