@@ -5,6 +5,8 @@ import './loginStyle.scss';
 import { AttemptLogin } from '../../actions/loginActions'
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
+import { parseJwt } from "../../components/services/localStorage";
+import moment from 'moment';
 
 class LoginForm extends Component {
     
@@ -17,7 +19,13 @@ class LoginForm extends Component {
             errorMessage: "",
             showError: false,
         };
-
+        let user;
+        try{
+            user = parseJwt();
+            if(!moment().isAfter(moment.unix(user.exp))) {
+                this.props.history.push('/Carpooling')
+            }
+        }catch(error){}
         this.handleSubmit = this.handleSubmit.bind(this);
         this.registerClicked = this.registerClicked.bind(this);
         this.clearInput = this.clearInput.bind(this);

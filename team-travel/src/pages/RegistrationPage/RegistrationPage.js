@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { RegistrationRequirements } from '../../constants/DataRequirements'
 import labels from './registration-page-labels.json';
+import { parseJwt } from "../../components/services/localStorage";
+import moment from 'moment';
 
 const loginPath = '/login';
 
@@ -33,6 +35,13 @@ class RegistrationPage extends Component {
             errorMessage: "",
             showError: false
         };
+        let user;
+        try{
+            user = parseJwt();
+            if(!moment().isAfter(moment.unix(user.exp))) {
+                this.props.history.push('/Carpooling')
+            }
+        }catch(error){}
         this.handleSubmit = this.handleSubmit.bind(this);
         this.buttonGoBack = this.buttonGoBack.bind(this);
         this.handleChange = this.handleChange.bind(this);
