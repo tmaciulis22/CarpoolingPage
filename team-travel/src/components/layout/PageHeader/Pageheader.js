@@ -4,7 +4,6 @@ import './Styles/header.scss';
 import './Styles/_navigation.scss'
 import './Styles/_profile-picture.scss'
 import '../../../styles/styles.scss';
-import imgUrl from './../../../assets/userPhoto.png';
 import NotificationsDropdown from '../notifications-dropdown/NotificationsDropdown';
 import { Link } from "react-router-dom";
 import { clearSession } from "./../../../actions/logoutActions";
@@ -12,6 +11,7 @@ import { matchPath } from "react-router";
 import { parseJwt } from "../../services/localStorage";
 import {connect} from "react-redux";
 import { bindActionCreators } from "redux";
+import Avatar from 'react-avatar';
 
 class Pageheader extends Component {
     render() {
@@ -71,7 +71,12 @@ class Pageheader extends Component {
                                 }
                             <div className="header-element">
                                 <Link className="profile-picture" to='/settings'>
-                                    <img className="profile-picture__image" src={imgUrl} alt="user foto"/>
+                                    <Avatar 
+                                        className="profile-picture__image" 
+                                        name={this.props.userData.fullName} 
+                                        round={true} 
+                                        size={40} 
+                                    />
                                 </Link>
                             </div>
                             <div className="header-element">
@@ -93,6 +98,7 @@ class Pageheader extends Component {
 export default connect(
     state => ({
         notifications: state.notifications.notifications,
+        userData: state.userSettings.userData,
     }),
     dispatch =>
         bindActionCreators(
