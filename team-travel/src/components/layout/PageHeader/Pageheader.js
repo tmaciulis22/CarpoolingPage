@@ -4,7 +4,6 @@ import './Styles/header.scss';
 import './Styles/_navigation.scss'
 import './Styles/_profile-picture.scss'
 import '../../../styles/styles.scss';
-import imgUrl from './../../../assets/userPhoto.png';
 import NotificationsDropdown from '../notifications-dropdown/NotificationsDropdown';
 import { Link } from "react-router-dom";
 import { clearSession } from "./../../../actions/logoutActions";
@@ -72,8 +71,12 @@ class Pageheader extends Component {
                                 }
                             <div className="header-element">
                                 <Link className="profile-picture" to='/settings'>
-                                    <Avatar className="profile-picture__image" name={this.props.userData.fullName} round={true} size={40} />
-                                    {/* <img className="profile-picture__image" src={imgUrl} alt="user foto"/> */}
+                                    <Avatar 
+                                        className="profile-picture__image" 
+                                        name={this.props.userData.fullName} 
+                                        round={true} 
+                                        size={40} 
+                                    />
                                 </Link>
                             </div>
                             <div className="header-element">
