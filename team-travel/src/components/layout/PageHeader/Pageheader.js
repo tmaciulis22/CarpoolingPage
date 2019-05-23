@@ -12,6 +12,7 @@ import { matchPath } from "react-router";
 import { parseJwt } from "../../services/localStorage";
 import {connect} from "react-redux";
 import { bindActionCreators } from "redux";
+import Avatar from 'react-avatar';
 
 class Pageheader extends Component {
     render() {
@@ -71,7 +72,8 @@ class Pageheader extends Component {
                                 }
                             <div className="header-element">
                                 <Link className="profile-picture" to='/settings'>
-                                    <img className="profile-picture__image" src={imgUrl} alt="user foto"/>
+                                    <Avatar className="profile-picture__image" name={this.props.userData.fullName} round={true} size={40} />
+                                    {/* <img className="profile-picture__image" src={imgUrl} alt="user foto"/> */}
                                 </Link>
                             </div>
                             <div className="header-element">
@@ -93,6 +95,7 @@ class Pageheader extends Component {
 export default connect(
     state => ({
         notifications: state.notifications.notifications,
+        userData: state.userSettings.userData,
     }),
     dispatch =>
         bindActionCreators(

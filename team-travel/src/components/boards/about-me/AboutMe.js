@@ -7,6 +7,7 @@ import Button from '../../layout/Button/Button.js';
 import CityOptions from '../../../constants/CityOptions';
 import labels from './about-me-labels.json';
 import { UserSettingsRequirements } from '../../../constants/DataRequirements';
+import Avatar from 'react-avatar';
 
 class AboutMe extends Component {
     constructor(props) {
