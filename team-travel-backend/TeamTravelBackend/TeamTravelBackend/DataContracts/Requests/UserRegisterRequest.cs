@@ -16,6 +16,7 @@ namespace TeamTravelBackend.DataContracts.Requests
         [Required(ErrorMessage = ErrorMessages.FullNameMissing)]
         [MaxLength(DataRequirements.FullNameMaxLength, ErrorMessage = ErrorMessages.FullNameTooLong)]
         public string FullName { get; set; }
+        public string MainOffice { get; set; }
         [MaxLength(50)]
         public string SlackId { get; set; }
         [RegularExpression(DataRequirements.CarPlatePattern, ErrorMessage = ErrorMessages.CarPlateBadFormat)]

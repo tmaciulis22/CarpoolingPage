@@ -100,6 +100,7 @@ namespace TeamTravelBackend.Data
                 Password = PasswordCrypt.EncryptPassword(userRegisterRequest.Password),
                 FullName = userRegisterRequest.FullName,
                 SlackId = userRegisterRequest.SlackId,
+                MainOffice = userRegisterRequest.MainOffice,
                 IsDriver = true,
                 RoleId = 1,
                 PhoneNumber = userRegisterRequest.Phone,
