@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import Button from '../../components/layout/Button/Button';
 import Input from '../../components/layout/input/Input';
+import Dropdown from '../../components/layout/dropdown/Dropdown';
 import './RegistrationStyle.scss';
 import { AttemptRegistration } from '../../actions/registrationActions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { RegistrationRequirements } from '../../constants/DataRequirements'
 import labels from './registration-page-labels.json';
+import CityOptions from '../../constants/CityOptions';
 import { parseJwt } from "../../components/services/localStorage";
 import moment from 'moment';
 
@@ -24,6 +26,7 @@ class RegistrationPage extends Component {
             slackId: "",
             phone: "",
             carPlate: "",
+            mainOffice: Object.values(CityOptions)[0],
             errors: {
                 email: true,
                 passwords: true,
@@ -149,6 +152,7 @@ class RegistrationPage extends Component {
             slackId: !!this.state.slackId.trim() ? this.state.slackId.trim() : null,
             carPlate: !!this.state.carPlate.trim() ? this.state.carPlate.trim() : null,
             phone: !!this.state.phone.trim() ? this.state.phone.trim() : null,
+            mainOffice: this.state.mainOffice,
 
             registrationSuccessful: this.registrationSuccessful,
             registrationUnsuccessful: this.registrationUnsuccessful,
@@ -248,6 +252,13 @@ class RegistrationPage extends Component {
                                         title={labels.surnameTitle}
                                         errorList={{ error: this.state.errors.fullName }}
                                         isRequired={true}
+                                    />
+                                    <Dropdown
+                                        name={"mainOffice"}
+                                        title={labels.officeTitle}
+                                        options={Object.values(CityOptions)}
+                                        value={this.state.mainOffice}
+                                        onChange={this.handleChange}
                                     />
                                     <Input
                                         input={{

@@ -12,6 +12,7 @@
     "nameTitle": "Your name *",
     "surnamePlaceholder": "Surname",
     "surnameTitle": "Your surname *",
+    "officeTitle": "Main office",
     "slackPlaceholder": "slackId",
     "slackTitle": "Slack Id",
     "carPlatePlaceholder": "AAA000",
